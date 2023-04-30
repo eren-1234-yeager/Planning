@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %} Tasks {% endblock title %}
+
+{% block body %}
+<h1 class="text-center my-2">Welcome To Tasks</h1>
+<div class="container my-2">
+    <form action="/tasks/" method="post">
+    {% csrf_token %}
+        <label for="title" class="form-label">Add Task Title:</label>
+        <input type="text" id="title" name="title" class="form-control my-1" aria-labelledby="passwordHelpBlock">
+
+        <label for="task" class="form-label">Add Task Description:</label>
+        <textarea type="text" id="desc" name="desc" class="form-control" aria-labelledby="passwordHelpBlock"></textarea>
+
+        <button class="btn btn-primary my-1">Add</button>
+    </form>
+</div>
+
+{% endblock body %}
