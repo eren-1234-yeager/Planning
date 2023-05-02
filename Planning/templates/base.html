@@ -50,6 +50,34 @@
     {% endfor %}
 {% endif %}
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Task:</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form method="post" action="/tasks/update/">
+              {% csrf_token %}
+
+          <input type="hidden" id="id" name="id">
+          <label for="title" class="form-label">Edit Task Title:</label>
+          <input type="text" id="editTitle" name="etitle" class="form-control my-1" aria-labelledby="passwordHelpBlock">
+
+          <label for="task" class="form-label">Edit Task Description:</label>
+          <textarea type="text" id="editDesc" name="edesc" class="form-control" aria-labelledby="passwordHelpBlock"></textarea>
+
+        <button type="submit" class="btn btn-primary my-2">Save changes</button>
+
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>
     {% block body %}
     
     {% endblock body %}

@@ -15,5 +15,58 @@
         <button class="btn btn-primary my-1">Add</button>
     </form>
 </div>
+<div class="container">
+    <h3 class="text-center">Your Tasks:</h3>
+
+    <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Title</th>
+      <th scope="col">Description</th>
+      <th scope="col">Date</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for task in tasks %}
+    <tr>
+      <th scope="row">#</th>
+      <td>{{task.task_title }}</td>
+      <td>{{task.task_desc}}</td>
+      <td>{{task.task_dt}}</td>
+      <td>
+        <button type="button" class="btn btn-primary edit" id="{{task.task_id}}" data-bs-toggle="modal" data-bs-target="#editModal">
+          edit
+        </button>
+        
+        <a href="/tasks?delete={{task.task_id}}"><button class="btn btn-danger btnDel" value="{{task.task_id}}"> delete</button></a>
+    </td>
+    </tr>
+    {% endfor %}
+
+
+  </tbody>
+</table>
+    
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
+
+<script>
+  let a=Array.from(document.getElementsByClassName('edit'))
+
+  a.forEach((element)=>{
+    element.addEventListener('click',(e)=>{
+      let p=e.target.parentElement.parentElement
+      let title=p.firstElementChild.nextElementSibling.innerText
+      let desc=p.firstElementChild.nextElementSibling.nextElementSibling.innerText
+      
+      id.value=e.target.id
+      editTitle.value=title
+      editDesc.innerText=desc
+    })
+  })
+</script>
 
 {% endblock body %}

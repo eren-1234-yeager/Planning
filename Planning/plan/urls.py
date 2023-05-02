@@ -6,5 +6,6 @@ from plan import views
 urlpatterns = [
     path("planning/",views.planning),
     path("notes/",views.notes),
-    path("tasks/",views.tasks)
+    path("tasks/",views.tasks),
+    path("tasks/update/",views.updatetasks),
 ]

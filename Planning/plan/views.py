@@ -1,5 +1,5 @@
-from django.contrib.messages import constants as messages
-from django.shortcuts import HttpResponse, render
+from django.contrib import messages
+from django.shortcuts import HttpResponse, redirect, render
 
 from plan.models import Task
 
@@ -19,5 +19,31 @@ def tasks(request):
         t_desc=request.POST.get('desc')
         task=Task(task_user=request.user,task_title=t_title,task_desc=t_desc)
         task.save()
-        messages.success(request,"Task Added Successfully!")            
-    return render(request, "plan/tasks.html")
+        messages.success(request,"Task Added Successfully!")  
+    
+    tasks=Task.objects.filter(task_user=request.user)   
+    params={
+        "tasks":tasks
+    }      
+    todel=request.GET.get('delete')
+  
+    if todel:
+        messages.success(request,"Task deleted Successfully!")
+        Task.objects.filter(task_id=todel).delete()
+
+    return render(request, "plan/tasks.html",params)
+
+def updatetasks(request):
+    if request.method=="POST":
+        id =request.POST.get('id')
+        title=request.POST.get('etitle')
+        desc=request.POST.get('edesc')
+
+        t=Task.objects.get(task_id=id)
+        t.task_title=title
+        t.task_desc=desc
+        t.save()
+        
+        messages.success(request,"Task updated successfully!")   
+        return redirect('/tasks')
+    return redirect('/tasks')
