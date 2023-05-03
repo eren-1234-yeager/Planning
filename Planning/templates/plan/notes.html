@@ -1,6 +1,27 @@
 {% extends "base.html" %}
-{% block title %} Notes {% endblock title %}
+{% block title %} Add Notes {% endblock title %}
 
 {% block body %}
-this is body of /notes
+<style>
+    body{
+        {% comment %} background-color: rgb(255, 255, 0); {% endcomment %}
+    }
+    #noteBody{
+        width: 100%;
+        height: 60%;
+    }
+</style>
+<div class="container topN my-2">
+    <h1 class="text-center note">Add Note</h1>
+</div>
+<div class="container my-2">
+    <form method="post" action="/notes/add/">
+        <input type="text" class="form-control my-2" name="noteTitle" id="noteTitle" 
+        aria-describedby="text" placeholder="Note Title">
+        {% csrf_token %}
+        <textarea name="noteBody" placeholder="Note Description" id="noteBody" cols="30" rows="10"></textarea>
+        
+        <button class="btn btn-primary my-2"type="submit" >Add</button>
+    </form>
+</div>
 {% endblock body %}

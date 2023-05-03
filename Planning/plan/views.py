@@ -1,7 +1,7 @@
 from django.contrib import messages
 from django.shortcuts import HttpResponse, redirect, render
 
-from plan.models import Task
+from plan.models import Note, Task
 
 
 # Create your views here.
@@ -10,8 +10,29 @@ def planning(request):
 
 
 def notes(request):
-    return render(request, "plan/notes.html")
+        notes=Note.objects.filter(note_user=request.user)
+        params={
+        'notes':notes
+        }
+        return render(request, "plan/notesList.html",params)
 
+def addNotes(request):
+    if request.method=="POST":
+        noteT=request.POST.get('noteTitle')
+        noteD=request.POST.get('noteBody')
+        note=Note(note_title=noteT,note_body=noteD,note_user=request.user)
+        note.save()
+        messages.success(request,"Note Added Successfully!")
+        return redirect('/notes')
+
+    return render(request,'plan/notes.html')
+
+def viewNote(request,id):
+    try:
+        note=Note.objects.get(note_id=id)
+        return render(request,'plan/viewNote.html',{'note':note})
+    except:
+        return redirect('/notes')
 
 def tasks(request):
     if request.method=="POST":

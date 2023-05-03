@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block title %} Notes {% endblock title %}
+
+{% block body %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<style>
+    .topN{
+        display: grid;
+        grid-template-columns: repeat(6,1fr);
+        place-content: center;
+        place-items: center;
+    }
+    .addnote{
+        width: 100%;
+        place-self: center;
+        grid-column: 6;
+    }
+    .note{
+        grid-column: 3;
+    }
+
+    .list{
+        display:grid;
+        grid-template-columns: repeat(3,1fr);
+        grid-template-rows: repeat(3,1fr);
+        place-content: center;
+    }
+    .noteitem{
+        color:rgb(0, 0, 0);
+        height:100%;
+        width: 100%;
+    }
+
+</style>
+<div class="container topN my-2">
+    <h1 class="text-center note">Notes</h1>
+    <a href="/notes/add/" class="an"><button type="button" class="btn btn-primary addnote">Add note</button></a>
+</div>
+
+<div class="container list my-2">
+
+    {% for note in notes %}
+        <div class="noteitem mx-2 my-2">
+            <a href="/notes/{{note.note_id}}"><button class="btn btn-secondary">
+                    <span class="fa fa-folder" style="font-size: 25px;"></span>  {{note.note_title}}
+            </button></a>
+        </div>
+    {% endfor %}
+</div>
+{% endblock body %}

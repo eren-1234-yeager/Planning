@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}{{note.note_title}}{% endblock title %}
+{% block body %}
+<style>
+    .jumbotron {
+        border: 2px solid black;
+        min-height: 598px;
+
+    }
+</style>
+<div class="container my-2">
+    <div class="jumbotron ">
+        <h1 class="display-4 text-center mx-2"><b>{{note.note_title}}</b></h1>
+        <p class="lead mx-2">At <b>{{note.note_dt}}</b> by <b>{{note.note_user}}</b></p>
+        <hr class="my-4">
+        <p class=" mx-2" style="
+        font-size: 25px;">{{note.note_body}}</p>
+    </div> 
+</div>
+{% endblock body %}
